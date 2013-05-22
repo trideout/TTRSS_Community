@@ -23,7 +23,7 @@ class Friend_Share extends Plugin {
 	}
 
 	function get_unread($feed_id) {
-        $result = db_query("SELECT COUNT(*) AS thecount FROM ttrss_mc_WHERE uid='$_SESSION['uid']' AND is_read IS FALSE");
+        $result = db_query("SELECT COUNT(*) AS thecount FROM ttrss_mc_WHERE uid='".$_SESSION['uid']."' AND is_read IS FALSE");
         $unread = db_fetch_results($result, 0, 'thecount');
 		return $unread;
 	}

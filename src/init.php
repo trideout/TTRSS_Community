@@ -11,7 +11,7 @@ class Friend_Share extends Plugin {
 
 	function about() {
 		return array(1.0,
-			"Example vfeed plugin",
+			"MicroCommunity Plugin ",
 			"fox",
 			false);
 	}
@@ -19,11 +19,13 @@ class Friend_Share extends Plugin {
 	function init($host) {
 		$this->host = $host;
 
-		$this->dummy_id = $host->add_feed(-1, 'Dummy feed', 'images/pub_set.svg', $this);
+		$this->dummy_id = $host->add_feed(-1, 'Comments', 'images/pub_set.svg', $this);
 	}
 
 	function get_unread($feed_id) {
-		return 1234;
+        $result = db_query("SELECT COUNT(*) AS thecount FROM ttrss_mc_WHERE uid='$_SESSION['uid']' AND is_read IS FALSE");
+        $unread = db_fetch_results($result, 0, 'thecount');
+		return $unread;
 	}
 
 	function get_headlines($feed_id, $options) {
